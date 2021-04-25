@@ -25,7 +25,9 @@ namespace Essay_Analysis_Tool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            NotepadSharp.MainForm = new MainForm();
+            NotepadSharp.MainForm.NewTab(null);
+            Application.Run(NotepadSharp.MainForm);
         }
     }
 }

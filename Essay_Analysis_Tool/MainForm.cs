@@ -103,7 +103,6 @@ namespace Essay_Analysis_Tool
 
             logger.Log("Form Initialized!", LoggerMessageType.Info);
             
-            CreateTab(null);
             UpdateDocumentMap();
 
             BuildAutocompleteMenu();
@@ -111,7 +110,7 @@ namespace Essay_Analysis_Tool
 
         #region Tab Functionality
 
-        private void NewTab(string fileName)
+        public void NewTab(string fileName)
         {
             Editor tab = NotepadSharp.CreateTab(fileName);
             tab.mainEditor.Focus();
@@ -124,7 +123,7 @@ namespace Essay_Analysis_Tool
 
         private bool IsFileAlreadyOpen(string fileName)
         {
-            foreach (Editor tab in tablist)
+            foreach (Editor tab in NotepadSharp.tablist)
             {
                 if (tab.Tag as string == fileName)
                 {
@@ -151,8 +150,20 @@ namespace Essay_Analysis_Tool
                 return;
 
             this.font = font;
-            foreach (Editor tab in tablist)
+            foreach (Editor tab in NotepadSharp.tablist)
                 tab.mainEditor.Font = font;
+        }
+
+        private void HighlightCurrentLine()
+        {
+            foreach (Editor tab in NotepadSharp.tablist.ToArray())
+            {
+                tab.CurrentLineHighlight = tab.CurrentLineHighlight ? false : true;
+            }
+            if (CurrentTB != null)
+            {
+                CurrentTB.Invalidate();
+            }
         }
 
         #endregion
@@ -216,7 +227,7 @@ namespace Essay_Analysis_Tool
                 {
                     return;
                 }
-                tablist.Remove(tab);
+                NotepadSharp.tablist.Remove(tab);
                 dockpanel.Controls.Remove(tab);
                 UpdateDocumentMap();
             }
@@ -244,7 +255,7 @@ namespace Essay_Analysis_Tool
 
         private void CloseAllToolStripButton_Click(object sender, EventArgs e)
         {
-            CloseAllTabs();
+            NotepadSharp.CloseAllTabs();
         }
 
         private void CutToolStripButton_Click(object sender, EventArgs e)
@@ -401,7 +412,7 @@ namespace Essay_Analysis_Tool
         {
             file_open = new OpenFileDialog();
             if (file_open.ShowDialog() == DialogResult.OK)
-                CreateTab(file_open.FileName);
+                NewTab(file_open.FileName);
         }
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -429,7 +440,7 @@ namespace Essay_Analysis_Tool
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateTab(null);
+            NewTab(null);
         }
 
         private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -487,7 +498,7 @@ namespace Essay_Analysis_Tool
                 {
                     file_open = new OpenFileDialog();
                     if (file_open.ShowDialog() == DialogResult.OK)
-                        CreateTab(file_open.FileName);
+                        NewTab(file_open.FileName);
                 }
                 else if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
                 {
@@ -519,7 +530,7 @@ namespace Essay_Analysis_Tool
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (Editor tab in tablist.ToArray())
+            foreach (Editor tab in NotepadSharp.tablist.ToArray())
             {
                 EditorClosingEventArgs args = new EditorClosingEventArgs(tab);
                 Editor_TabClosing(args);
@@ -528,7 +539,7 @@ namespace Essay_Analysis_Tool
                     e.Cancel = true;
                     return;
                 }
-                tablist.Remove(tab);
+                NotepadSharp.tablist.Remove(tab);
                 tab.Close();
             }
         }
@@ -574,7 +585,7 @@ namespace Essay_Analysis_Tool
 
             if (CurrentTB != null && documentMap != null)
             {
-                documentMap.Target = tablist.Count > 0 ? CurrentTB.mainEditor : null;
+                documentMap.Target = NotepadSharp.tablist.Count > 0 ? CurrentTB.mainEditor : null;
                 documentMap.Visible = _enableDocumentMap;
                 if (!_enableDocumentMap || documentMap.Target == null)
                 {

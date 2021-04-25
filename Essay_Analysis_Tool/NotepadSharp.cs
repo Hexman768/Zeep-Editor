@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -15,8 +12,8 @@ namespace Essay_Analysis_Tool
     /// </summary>
     public static class NotepadSharp
     {
-        static MainForm MainForm { get; set; }
-        static List<Editor> tablist = new List<Editor>();
+        public static MainForm MainForm { get; set; }
+        public static List<Editor> tablist = new List<Editor>();
 
         /// <summary>
         /// Creates a new instance of <see cref="Editor"/> with the given filename.
@@ -42,7 +39,6 @@ namespace Essay_Analysis_Tool
             tab.Title = fileName != null ? Path.GetFileName(fileName) : "new " + tablist.Count;
 
             tablist.Add(tab);
-            HighlightCurrentLine();
 
             return tab;
         }
@@ -54,22 +50,6 @@ namespace Essay_Analysis_Tool
         {
             foreach (Editor tab in tablist.ToArray())
                 tab.Close();
-        }
-
-        /// <summary>
-        /// Enables or disables current line highlighting depending on the value
-        /// of a boolean variable.
-        /// </summary>
-        public static void HighlightCurrentLine()
-        {
-            foreach (Editor tab in tablist.ToArray())
-            {
-                tab.CurrentLineHighlight = tab.CurrentLineHighlight ? false : true;
-            }
-            if (MainForm.CurrentTB != null)
-            {
-                MainForm.CurrentTB.Invalidate();
-            }
         }
 
         private static bool IsFileAlreadyOpen(string fileName)
