@@ -67,6 +67,7 @@
     <Compile Include="DiffViewerForm.Designer.cs">
       <DependentUpon>DiffViewerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ILogger.cs" />
     <Compile Include="LoggerMessageTypeEnum.cs" />
     <Compile Include="LoggerForm.cs">
       <SubType>Form</SubType>
@@ -80,6 +81,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NotepadSharp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\EditorClosingEventArgs.cs" />

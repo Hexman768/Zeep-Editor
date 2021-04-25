@@ -74,7 +74,6 @@ namespace Essay_Analysis_Tool
             this.xMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.diffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -253,8 +252,7 @@ namespace Essay_Analysis_Tool
             this.statusBarToolStripMenuItem,
             this.syntaxHighlightingToolStripMenuItem,
             this.documentMapToolStripMenuItem,
-            this.loggerToolStripMenuItem,
-            this.diffToolStripMenuItem});
+            this.loggerToolStripMenuItem});
             this.documentMapToolStripItem.Name = "documentMapToolStripItem";
             this.documentMapToolStripItem.Size = new System.Drawing.Size(44, 20);
             this.documentMapToolStripItem.Text = "View";
@@ -263,7 +261,7 @@ namespace Essay_Analysis_Tool
             // 
             this.statusBarToolStripMenuItem.CheckOnClick = true;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.statusBarToolStripMenuItem.Text = "Status Bar";
             this.statusBarToolStripMenuItem.Click += new System.EventHandler(this.StatusBarToolStripMenuItem_Click);
             // 
@@ -280,7 +278,7 @@ namespace Essay_Analysis_Tool
             this.visualBasicToolStripMenuItem,
             this.xMLToolStripMenuItem});
             this.syntaxHighlightingToolStripMenuItem.Name = "syntaxHighlightingToolStripMenuItem";
-            this.syntaxHighlightingToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.syntaxHighlightingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.syntaxHighlightingToolStripMenuItem.Text = "Syntax Highlighting";
             // 
             // noneToolStripMenuItem
@@ -349,23 +347,16 @@ namespace Essay_Analysis_Tool
             // documentMapToolStripMenuItem
             // 
             this.documentMapToolStripMenuItem.Name = "documentMapToolStripMenuItem";
-            this.documentMapToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.documentMapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.documentMapToolStripMenuItem.Text = "Document Map";
             this.documentMapToolStripMenuItem.Click += new System.EventHandler(this.DocumentMapToolStripMenuItem_Click);
             // 
             // loggerToolStripMenuItem
             // 
             this.loggerToolStripMenuItem.Name = "loggerToolStripMenuItem";
-            this.loggerToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.loggerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loggerToolStripMenuItem.Text = "Logger";
             this.loggerToolStripMenuItem.Click += new System.EventHandler(this.LoggerToolStripMenuItem_Click);
-            // 
-            // diffToolStripMenuItem
-            // 
-            this.diffToolStripMenuItem.Name = "diffToolStripMenuItem";
-            this.diffToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.diffToolStripMenuItem.Text = "Diff";
-            this.diffToolStripMenuItem.Click += new System.EventHandler(this.DiffToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -705,7 +696,6 @@ namespace Essay_Analysis_Tool
         private System.Windows.Forms.ToolStripButton hlCurrentLineToolStripButton;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolStripMenuItem loggerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem diffToolStripMenuItem;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockpanel;
     }
 }

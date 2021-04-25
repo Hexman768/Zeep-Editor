@@ -111,30 +111,13 @@ namespace Essay_Analysis_Tool
 
         #region Tab Functionality
 
-        List<Editor> tablist = new List<Editor>();
-
-        private void CreateTab(string fileName)
+        private void NewTab(string fileName)
         {
-            var tab = new Editor(this, fileName, font);
-            tab.Tag = fileName;
-
-            if (fileName != null && !IsFileAlreadyOpen(fileName))
-            {
-                tab.SetCurrentEditorSyntaxHighlight(fileName);
-                tab.OpenFile(fileName);
-            }
-            else if (fileName != null)
-            {
-                return;
-            }
-
-            tab.Title = fileName != null ? Path.GetFileName(fileName) : "new " + tablist.Count;
-
+            Editor tab = NotepadSharp.CreateTab(fileName);
             tab.mainEditor.Focus();
             tab.mainEditor.KeyDown += new KeyEventHandler(MainForm_KeyDown);
             tab.mainEditor.TextChangedDelayed += new EventHandler<TextChangedEventArgs>(Tb_TextChangedDelayed);
             tab.Show(this.dockpanel, DockState.Document);
-            tablist.Add(tab);
             UpdateDocumentMap();
             HighlightCurrentLine();
         }
@@ -152,12 +135,6 @@ namespace Essay_Analysis_Tool
             return false;
         }
 
-        private void CloseAllTabs()
-        {
-            foreach (Editor tab in tablist.ToArray())
-                tab.Close();
-        }
-
         private bool CallSave(Editor tab)
         {
             if (tab.Save())
@@ -166,18 +143,6 @@ namespace Essay_Analysis_Tool
                 return true;
             }
             return false;
-        }
-
-        private void HighlightCurrentLine()
-        {
-            foreach (Editor tab in tablist.ToArray())
-            {
-                tab.CurrentLineHighlight = tab.CurrentLineHighlight ? false : true;
-            }
-            if (CurrentTB != null)
-            {
-                CurrentTB.Invalidate();
-            }
         }
 
         private void ChangeFont(Font font)
@@ -209,7 +174,7 @@ namespace Essay_Analysis_Tool
 
         private void NewToolStripButton_Click(object sender, EventArgs e)
         {
-            CreateTab(null);
+            NewTab(null);
         }
 
         private void FindButton_Click(object sender, EventArgs e)
@@ -224,7 +189,7 @@ namespace Essay_Analysis_Tool
         {
             file_open = new OpenFileDialog();
             if (file_open.ShowDialog() == DialogResult.OK)
-                CreateTab(file_open.FileName);
+                NewTab(file_open.FileName);
         }
 
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
@@ -232,7 +197,7 @@ namespace Essay_Analysis_Tool
             OpenFileDialog fd = (OpenFileDialog) sender;
             string fileName = fd.FileName;
 
-            CreateTab(fileName);
+            NewTab(fileName);
         }
 
         private void CloseToolStripButton_Click(object sender, EventArgs e)
@@ -597,29 +562,6 @@ namespace Essay_Analysis_Tool
         }
 
         private bool IsSavedTab(string tagName) => tagName != null;
-
-        private void DiffToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<string> filePaths = new List<string>();
-
-            foreach (Editor item in tablist)
-            {
-                string filePath = (string)item.Tag;
-
-                if (IsSavedTab(filePath))
-                    filePaths.Add(filePath);
-
-                    if (filePaths.Count == 2)
-                        break;
-            }
-
-            if  (filePaths.Count == 1)
-                new DiffViewerForm(filePaths[0]).Show();
-            else if (filePaths.Count == 2)
-                new DiffViewerForm(filePaths[0], filePaths[1]).Show();
-            else
-                new DiffViewerForm().Show();
-        }
 
         #endregion
 
