@@ -110,6 +110,11 @@ namespace Essay_Analysis_Tool
 
         #region Tab Functionality
 
+        /// <summary>
+        /// Calls the <see cref="NotepadSharp.CreateTab"/> method then performs necessary UI operations
+        /// to display the tab.
+        /// </summary>
+        /// <param name="fileName">Name of file</param>
         public void NewTab(string fileName)
         {
             Editor tab = NotepadSharp.CreateTab(fileName);
