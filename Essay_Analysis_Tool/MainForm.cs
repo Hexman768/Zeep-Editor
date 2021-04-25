@@ -96,7 +96,6 @@ namespace Essay_Analysis_Tool
         public MainForm()
         {
             InitializeComponent();
-            file_open = new OpenFileDialog();
             logger = new LoggerForm();
 
             dockpanel.Theme = new VS2015LightTheme();
@@ -223,10 +222,9 @@ namespace Essay_Analysis_Tool
 
         private void OpenToolStripButton_Click(object sender, EventArgs e)
         {
+            file_open = new OpenFileDialog();
             if (file_open.ShowDialog() == DialogResult.OK)
-            {
                 CreateTab(file_open.FileName);
-            }
         }
 
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
@@ -436,6 +434,7 @@ namespace Essay_Analysis_Tool
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            file_open = new OpenFileDialog();
             if (file_open.ShowDialog() == DialogResult.OK)
                 CreateTab(file_open.FileName);
         }
@@ -521,6 +520,7 @@ namespace Essay_Analysis_Tool
             {
                 if (e.Control && e.KeyCode == Keys.O)
                 {
+                    file_open = new OpenFileDialog();
                     if (file_open.ShowDialog() == DialogResult.OK)
                         CreateTab(file_open.FileName);
                 }
